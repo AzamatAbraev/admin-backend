@@ -4,7 +4,7 @@ const { StatusCodes } = require("http-status-codes");
 const { BadRequestError, NotFoundError } = require("../errors");
 
 const getAllUsers = async (req, res) => {
-  let { limit, page } = req.query;
+  let { limit = 10, page = 1 } = req.query;
   limit = parseInt(limit);
   page = parseInt(page);
 
