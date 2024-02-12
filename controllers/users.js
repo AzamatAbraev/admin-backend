@@ -4,22 +4,13 @@ const { StatusCodes } = require("http-status-codes");
 const { BadRequestError, NotFoundError } = require("../errors");
 
 const getAllUsers = async (req, res) => {
-  let { limit = 10, page = 1 } = req.query;
-  limit = parseInt(limit);
-  page = parseInt(page);
-
-  const users = await User.find({})
-    .sort("createdAt")
-    .limit(limit)
-    .skip((page - 1) * limit);
+  const users = await User.find({});
 
   const count = await User.countDocuments();
 
   res.status(StatusCodes.OK).json({
     users,
     total: count,
-    limit: limit,
-    currentPage: page,
   });
 };
 
